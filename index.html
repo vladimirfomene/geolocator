@@ -36,21 +36,34 @@
       var mobile_system = '';
     }
 
-    window.onload = function(){
-      onDeviceReady();
-    };
 
     //Google map initialization
     var map;
     var marker;
     function initMap(){
-      var mapOptions = {
-        center: new google.maps.LatLng(5.758921,-0.2209543),
-        zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
 
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+
+          var mapOptions = {
+            center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+          var markerOptions = {
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+          };
+
+          marker = new google.maps.Marker(markerOptions);
+          marker.setMap(map);
+
+        });
+      } else {
+        alert("There is no location support on your browser.");
+      }
 
     }
 

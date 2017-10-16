@@ -14,13 +14,6 @@ function onDeviceReady() {
 // onSuccess Geolocation
 //
 function onSuccess(position) {
-
-    var markerOptions = {
-      position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-    };
-
-    marker = new google.maps.Marker(markerOptions);
-    marker.setMap(map);
 }
 
 // onError Callback receives a PositionError object
