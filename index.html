@@ -3,12 +3,27 @@
   <head>
   <meta charset="utf-8">
   <title>phonegap & jquery mobile boilerplate</title>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <link rel="stylesheet"  href="css/jquery.mobile.structure.css" />
   <link rel="stylesheet" href="css/jquery.mobile.theme.css" />
-  
+
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/app/app.js"></script>
+  <script src="js/app/bootstrap.js"></script>
+  <script src="js/lib/jquery.mobile.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map{
+      height: 100%;
+    }
+  </style>
+
   <script>
     var userAgent = navigator.userAgent + '';
     if (userAgent.indexOf('iPhone') > -1) {
@@ -20,32 +35,34 @@
     } else {
       var mobile_system = '';
     }
+
+    window.onload = function(){
+      onDeviceReady();
+    };
+
+    //Google map initialization
+    var map;
+    var marker;
+    function initMap(){
+      var mapOptions = {
+        center: new google.maps.LatLng(5.758921,-0.2209543),
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    }
+
+
   </script>
-  
-  <script src="js/lib/jquery.js"></script>
-  <!-- your scripts here -->
-  <script src="js/app/app.js"></script>
-  <script src="js/app/bootstrap.js"></script>
-  <script src="js/lib/jquery.mobile.js"></script>
 
   </head>
   <body>
-    
-    <div data-role="page">
-
-    	<div data-role="header">
-    		<h1>Single page</h1>
-    	</div><!-- /header -->
-
-    	<div data-role="content">
-            <p id="geolocation">Finding geolocation....</p>
-            here
-    	</div><!-- /content -->
-
-    	<div data-role="footer">
-    		<h4>Footer content</h4>
-    	</div><!-- /footer -->
-
-    </div><!-- /page -->
+      <div id="map">
+      </div>
+    <!-- Google maps javascript api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi5XLlJPvGIvOx3lia08f307ahecCQhXM&callback=initMap"
+    async defer></script>
   </body>
 </html>
